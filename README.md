@@ -11,7 +11,6 @@ This repository contains a Python script to convert images from one format to an
 - [Usage](#usage)
 - [Customization](#customization)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
