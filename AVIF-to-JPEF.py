@@ -1,32 +1,31 @@
-
 from PIL import Image
-import pillow_avif
-
 import os
 
+# Folder containing images
 folder = 'banners'
 
-input_dir = f'C:/Users/User/Desktop/Electronics Hive/ElectronicsHive/EH-images/{folder}'
-output_dir = f'C:/Users/User/Desktop/Electronics Hive/ElectronicsHive/EH-images/{folder}'
+# Input and output directories
+input_dir = f'C:/Users/User/...{folder}'
+output_dir = f'C:/Users/User/...{folder}'
 
-# ImgType = 'avif'
-# sliceLength = -5
+# Dictionary of image formats and their respective slice lengths
+image_formats = {
+    'jpg': -4,
+    'jpeg': -5,
+    'avif': -5,
+    # Add more formats here as needed
+}
 
-#ImgType = 'jpeg'
-#sliceLength = -5
+# Convert images to the following output format
+output_format = 'png'
 
-ImgType = 'jpg'
-sliceLength = -4
+# Convert images for each specified format
+for ImgType, sliceLength in image_formats.items():
+    for filename in os.listdir(input_dir):
+        if filename.endswith(f'.{ImgType}'):
+            print(filename[:sliceLength])
 
-for filename in os.listdir(input_dir):
-    # if filename.endswith('.jpg'):
-    if filename.endswith(f'.{ImgType}'):
-        print(filename[:sliceLength])
+            img = Image.open(os.path.join(input_dir, filename))
+            img.save(os.path.join(output_dir, f'{filename[:sliceLength]}.{output_format}'))
 
-        img = Image.open(os.path.join(input_dir,filename))
-        img.save(os.path.join(output_dir,f'{filename[:sliceLength]}.png'))
-
-        # os.unlink(os.path.join(input_dir,f'{filename[:-4]}.jpg'))
-        os.unlink(os.path.join(input_dir,f'{filename[:sliceLength]}.{ImgType}'))
-
-
+            os.unlink(os.path.join(input_dir, filename))
